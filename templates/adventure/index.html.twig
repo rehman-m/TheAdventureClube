@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdventureController!{% endblock %}
+
+{% block body %}
+<div>
+    <div class="header bg-dark p-3 d-flex justify-content-between">
+         <div class="home   ">
+         <a href="{{ path('app_adventure') }}" class="text-white text-decoration-none">Home</a>
+         </div>
+        <div class="inloggen  ">
+        <a href="{{ path('app_login') }}" class="text-white text-decoration-none ">Inloggen</a>
+        </div>
+
+    </div>
+
+    <div class="adventure d-flex justify-content-center p-4 flex-column text-center">
+
+        <div>
+        <h1>The Adventure Club</h1>
+        </div>
+
+        <div>
+            <p>Wij zijn Emma, Lisa ,Alex en Mark <br>
+
+Dit is onze website waar wij verhalen delen over onze technnlogische avonturen .Veel lees plezier!            </p>
+        </div>
+
+
+    </div>
+
+<div class="d-flex justify-content-center text-center text-white">
+    <div class="bg-secondary w-50 p-4 ">
+        Beleef met ons de avonturen in Techville
+    </div>
+</div>
+
+</div>
+
+
+
+{% endblock %}
