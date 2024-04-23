@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Story;
+use App\Form\AddType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,13 +81,25 @@ class LoginController extends AbstractController
         ]);
     }
     #[Route('/add', name: 'app_add')]
-    public function add(EntityManagerInterface $entityManager): Response
+    public function add( Request $request ,EntityManagerInterface $entityManager): Response
     {
         $story =$entityManager->getRepository(Story::class)->findAll();
         $story= new story();
-        $form =
+        $form = $this->createForm(AddType::class, $story);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            return $this ->redirectToRoute('app_member');
+        }
+
+
+
         return $this->render('login/add.html.twig', [
             'controller_name' => 'LoginController',
+            'story'=>$story,
+            'form'=>$form
 
         ]);
     }
