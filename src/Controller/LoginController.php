@@ -46,11 +46,13 @@ class LoginController extends AbstractController
 
     }
     #[Route('/admin', name: 'app_admin')]
-    public function admin(): Response
+    public function admin(EntityManagerInterface $entityManager): Response
     {
+        $story=$entityManager->getRepository(Story::class)->findAll();
 
         return $this->render('login/admin.html.twig', [
             'controller_name' => 'LoginController',
+            'story'=>$story,
         ]);
     }
 
@@ -113,6 +115,18 @@ class LoginController extends AbstractController
             'form'=>$form
 
         ]);
+    }
+
+    #[Route('/del/{id} ' , name:"del")]
+
+    public function del(EntityManagerInterface $em, Request $request ,int $id): Response
+    {
+
+        $story=$em->getRepository(Story::class)->find($id);
+
+        $em->remove($story);
+        $em->flush();
+        return  $this ->redirectToRoute('app_admin');
     }
 
 

@@ -15,11 +15,45 @@
 
     </div>
 </div>
-<div class="d-flex justify-content-center ">
+<div class="d-flex justify-content-center flex-column  ">
     <div>
-       <h1> Welkom {{ app.user.fname }} !</h1>
+       <h1 class="text-center"> Welkom {{ app.user.fname }} !</h1>
 
-        <p>Dit is de admin pagina .</p>
+        <p class="text-center">Dit is de admin pagina .</p>
+    </div>
+
+    <div class="text-center mt-5">
+        <h1>Mijn Verhalen</h1>
+    </div>
+
+    <div class="w-100 p-5">
+        <table class="table">
+            <thead>
+            <tr>
+
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date</th>
+                <th scope="col">Who</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for s in story %}
+                <td>{{s.title }}</td>
+                <td>{{ s.description }}</td>
+                <td> {{s.date|date('d/m/y')}}   </td>
+                <td> {{s.user.fname}}   </td>
+                <td>  <button class="btn btn-danger">
+
+                        <a class="text-white" href="{{ path('del',{id:s.id}) }}">Delete</a>
+                    </button> </td>
+            </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
     </div>
 
 
