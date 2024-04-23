@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Story;
 use App\Form\AddType;
+use App\Form\UpdateType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -74,9 +75,21 @@ class LoginController extends AbstractController
     #[Route('/update/{id}', name: 'app_update')]
     public function update( Request $request ,EntityManagerInterface $entityManager,int $id): Response
     {
-        $entityManager->getRepository(Story::class)->findAll();
-        return $this->render('login/member.html.twig', [
+       $story= $entityManager->getRepository(Story::class)->find($id);
+
+        $form=$this->createForm(UpdateType::class,$story);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $story=$form->getData();
+            $entityManager->persist($story);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_member');
+        }
+
+        return $this->render('login/update.html.twig', [
             'controller_name' => 'LoginController',
+            'form' => $form,
 
         ]);
     }
