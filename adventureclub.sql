@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 23 apr 2024 om 12:36
+-- Gegenereerd op: 23 apr 2024 om 14:52
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -77,8 +77,9 @@ CREATE TABLE `story` (
 --
 
 INSERT INTO `story` (`id`, `title`, `description`, `date`, `user_id`) VALUES
-(1, 'Chat GPT', 'Chat Gpt is good for health .', '2024-04-03', 1),
-(2, 'Symfony', 'Leren van Symfony', '2024-04-11', 2);
+(2, 'Symfony', 'Leren van Symfony', '2024-04-11', 2),
+(4, 'Chat GPT', 'Chat Gpt is heel handig.', '2022-02-02', 2),
+(5, 'Symfony 2', 'We maken website met Symfony 3', '2022-06-05', 2);
 
 -- --------------------------------------------------------
 
@@ -150,7 +151,7 @@ ALTER TABLE `messenger_messages`
 -- AUTO_INCREMENT voor een tabel `story`
 --
 ALTER TABLE `story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT voor een tabel `user`
