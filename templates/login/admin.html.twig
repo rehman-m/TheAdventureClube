@@ -43,7 +43,7 @@
                 <td>{{s.title }}</td>
                 <td>{{ s.description }}</td>
                 <td> {{s.date|date('d/m/y')}}   </td>
-                <td> {{s.user.fname}}   </td>
+                <td> {{ s.user.fname }}   </td>
                 <td>  <button class="btn btn-danger">
 
                         <a class="text-white" href="{{ path('del',{id:s.id}) }}">Delete</a>
