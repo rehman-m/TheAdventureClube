@@ -71,10 +71,10 @@ class LoginController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route('/update/id', name: 'app_update')]
-    public function update(EntityManagerInterface $entityManager): Response
+    #[Route('/update/{id}', name: 'app_update')]
+    public function update( Request $request ,EntityManagerInterface $entityManager,int $id): Response
     {
-        $story =$entityManager->getRepository(Story::class)->findAll();
+        $entityManager->getRepository(Story::class)->findAll();
         return $this->render('login/member.html.twig', [
             'controller_name' => 'LoginController',
 
@@ -83,19 +83,17 @@ class LoginController extends AbstractController
     #[Route('/add', name: 'app_add')]
     public function add( Request $request ,EntityManagerInterface $entityManager): Response
     {
-        $story =$entityManager->getRepository(Story::class)->findAll();
+        $entityManager->getRepository(Story::class)->findAll();
         $story= new story();
         $form = $this->createForm(AddType::class, $story);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
+            $story= ($form->getData());
+            $entityManager->persist($story);
+            $entityManager->flush();
             return $this ->redirectToRoute('app_member');
         }
-
-
-
         return $this->render('login/add.html.twig', [
             'controller_name' => 'LoginController',
             'story'=>$story,
