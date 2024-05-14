@@ -18,6 +18,10 @@ class AddType extends AbstractType
             ->add ('Title', TextType::class)
             ->add('Description', TextType::class)
             ->add('Date', DateType::class)
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'id',
+            ])
             ->add('Save',SubmitType::class)
         ;
     }
