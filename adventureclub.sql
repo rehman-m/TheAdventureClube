@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 23 apr 2024 om 14:52
+-- Gegenereerd op: 16 mei 2024 om 12:47
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -40,7 +40,25 @@ CREATE TABLE `doctrine_migration_versions` (
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 ('DoctrineMigrations\\Version20240423080847', '2024-04-23 10:08:54', 38),
 ('DoctrineMigrations\\Version20240423091852', '2024-04-23 11:19:01', 26),
-('DoctrineMigrations\\Version20240423092037', '2024-04-23 11:20:44', 140);
+('DoctrineMigrations\\Version20240423092037', '2024-04-23 11:20:44', 140),
+('DoctrineMigrations\\Version20240516091021', '2024-05-16 12:29:14', 17),
+('DoctrineMigrations\\Version20240516095731', '2024-05-16 12:29:14', 6),
+('DoctrineMigrations\\Version20240516102823', '2024-05-16 12:29:14', 12),
+('DoctrineMigrations\\Version20240516103008', '2024-05-16 12:30:12', 125),
+('DoctrineMigrations\\Version20240516103059', '2024-05-16 12:31:02', 144);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `lesson`
+--
+
+CREATE TABLE `lesson` (
+  `id` int(11) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -93,16 +111,18 @@ CREATE TABLE `user` (
   `roles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '(DC2Type:json)' CHECK (json_valid(`roles`)),
   `password` varchar(255) NOT NULL,
   `fname` varchar(255) NOT NULL,
-  `master` varchar(255) NOT NULL
+  `master` varchar(255) DEFAULT NULL,
+  `iban` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `roles`, `password`, `fname`, `master`) VALUES
-(1, 'emma@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$chqKNoB3zq.RmU8owEA6ieA4eZ5w/7QXDesatGOp5shlrtKdeTDgK', 'Emma', ''),
-(2, 'lisa@gmail.com', '[\"ROLE_MEMBER\"]', '$2y$13$tOcPwaEaWaHDVRYc2URNXeIqmGKldMRZXa0iyVbg5flAeAIXImvpq', 'Lisa', '');
+INSERT INTO `user` (`id`, `email`, `roles`, `password`, `fname`, `master`, `iban`) VALUES
+(1, 'emma@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$chqKNoB3zq.RmU8owEA6ieA4eZ5w/7QXDesatGOp5shlrtKdeTDgK', 'Emma', '', ''),
+(2, 'lisa@gmail.com', '[\"ROLE_MEMBER\"]', '$2y$13$tOcPwaEaWaHDVRYc2URNXeIqmGKldMRZXa0iyVbg5flAeAIXImvpq', 'Lisa', '', ''),
+(3, 'abdi', '[\"ROLE_DOCENT\"]', '$2y$13$3nGsD1ZTj9v3KhgrUOQEXe.RpnZxZzW/pL60as3qu7htNoHHysMYa', 'Solo', NULL, 'Nl11ingb123456');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -113,6 +133,13 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `fname`, `master`) VALUE
 --
 ALTER TABLE `doctrine_migration_versions`
   ADD PRIMARY KEY (`version`);
+
+--
+-- Indexen voor tabel `lesson`
+--
+ALTER TABLE `lesson`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_F87474F3A76ED395` (`user_id`);
 
 --
 -- Indexen voor tabel `messenger_messages`
@@ -142,6 +169,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT voor een tabel `lesson`
+--
+ALTER TABLE `lesson`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT voor een tabel `messenger_messages`
 --
 ALTER TABLE `messenger_messages`
@@ -157,11 +190,17 @@ ALTER TABLE `story`
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
 --
+
+--
+-- Beperkingen voor tabel `lesson`
+--
+ALTER TABLE `lesson`
+  ADD CONSTRAINT `FK_F87474F3A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Beperkingen voor tabel `story`

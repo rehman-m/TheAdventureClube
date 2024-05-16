@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Story;
 use App\Entity\User;
 use App\Form\AddType;
+use App\Form\DocentType;
 use App\Form\RegistrationFormType;
 use App\Form\UpdateType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -137,7 +138,7 @@ class LoginController extends AbstractController
     public function registerDocent(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(DocentType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -158,9 +159,9 @@ class LoginController extends AbstractController
 
             return $security->login($user, 'form_login', 'main');
         }
-        $user=$entityManager->getRepository(User::class)->findAll();
 
-        return $this->render('registration/register.html.twig', [
+
+        return $this->render('login/docent.html.twig', [
             'registrationForm' => $form,
             'user'=>$user
         ]);
