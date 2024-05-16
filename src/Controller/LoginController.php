@@ -52,6 +52,7 @@ class LoginController extends AbstractController
     #[Route('/admin', name: 'app_admin')]
     public function admin(EntityManagerInterface $entityManager): Response
     {
+        $user=$entityManager->getRepository(User::class)->findBy("roles")
         $story=$entityManager->getRepository(Story::class)->findAll();
 
         return $this->render('login/admin.html.twig', [
