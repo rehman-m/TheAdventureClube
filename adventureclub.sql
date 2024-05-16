@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 16 mei 2024 om 12:47
+-- Gegenereerd op: 16 mei 2024 om 13:53
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -112,7 +112,7 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `fname` varchar(255) NOT NULL,
   `master` varchar(255) DEFAULT NULL,
-  `iban` varchar(255) NOT NULL
+  `iban` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `fname`, `master`, `iban`) VALUES
 (1, 'emma@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$chqKNoB3zq.RmU8owEA6ieA4eZ5w/7QXDesatGOp5shlrtKdeTDgK', 'Emma', '', ''),
 (2, 'lisa@gmail.com', '[\"ROLE_MEMBER\"]', '$2y$13$tOcPwaEaWaHDVRYc2URNXeIqmGKldMRZXa0iyVbg5flAeAIXImvpq', 'Lisa', '', ''),
-(3, 'abdi', '[\"ROLE_DOCENT\"]', '$2y$13$3nGsD1ZTj9v3KhgrUOQEXe.RpnZxZzW/pL60as3qu7htNoHHysMYa', 'Solo', NULL, 'Nl11ingb123456');
+(4, 'abdi', '[\"ROLE_DOCENT\"]', '$2y$13$f8DTKiMzhCQyD92tboU3D.eji8K48D58Fn.raDuHzttQI/TaLYkAi', 'Solo', NULL, 'NL11INGB123456789');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -190,7 +190,7 @@ ALTER TABLE `story`
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Beperkingen voor geëxporteerde tabellen

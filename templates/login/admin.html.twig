@@ -7,7 +7,7 @@
 
     <div class="header bg-dark p-3 d-flex justify-content-between">
         <div class="home   ">
-            <a href="" class="text-white text-decoration-none">Home</a>
+            <a href="{{ path('app_adventure') }}" class="text-white text-decoration-none">Home</a>
         </div>
         <div class="docent ">
             <a href="{{ path('app_docent') }}" class="text-white text-decoration-none ">Nieuwe Docent </a>
@@ -65,35 +65,33 @@
             <h1>Nieuwe Docenten</h1>
         </div>
 
-        <div class="w-100 p-5">
-            <table class="table">
-                <thead>
-                <tr>
+    <div class="w-100 p-5">
+        <table class="table">
+            <thead>
+            <tr>
 
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Who</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-{#                    {% for u in user %}#}
-{#                    <td>{{u.fname }}</td>#}
-{#                    <td>{{ s.description }}</td>#}
-{#                    <td> {{s.date|date('d/m/y')}}   </td>#}
-{#                    <td> {{ s.user.fname }}   </td>#}
-                    <td>  <button class="btn btn-danger">
+                <th scope="col">First Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">IBAN</th>
 
-{#                            <a class="text-white" href="{{ path('del',{id:s.id}) }}">Delete</a>#}
-                        </button> </td>
-                </tr>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for u in users %}
+                <td>{{u.fname }}</td>
+                <td>{{ u.email }}</td>
+                <td> {{u.iban}}   </td>
+{#                <td> {{ s.user.fname }}   </td>#}
+{#                <td>  <button class="btn btn-danger">#}
 
-{#                {% endfor %}#}
-                </tbody>
-            </table>
+                <td>     <a class="text-white btn btn-danger" href="{{ path('del2',{id:u.id}) }}">Delete</a>
+                     </td>
+            </tr>
 
-        </div>
+            {% endfor %}
+            </tbody>
+        </table>
 
 </div>
 
